@@ -284,6 +284,18 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "sentry",
+      "rootUri": "file:///Users/sonusony/.pub-cache/hosted/pub.dev/sentry-8.11.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "sentry_flutter",
+      "rootUri": "file:///Users/sonusony/.pub-cache/hosted/pub.dev/sentry_flutter-8.11.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "sky_engine",
       "rootUri": "file:///Users/sonusony/development/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
@@ -500,7 +512,7 @@
       "languageVersion": "3.5"
     }
   ],
-  "generated": "2024-12-20T17:25:08.197356Z",
+  "generated": "2024-12-20T17:33:40.389629Z",
   "generator": "pub",
   "generatorVersion": "3.5.4",
   "flutterRoot": "file:///Users/sonusony/development/flutter",

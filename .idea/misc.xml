@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="GitLabDefaultAccount">
-    <option name="defaultAccountId" value="0d8769d8-9711-4123-9cda-96304901e518" />
-  </component>
-  <component name="GithubDefaultAccount">
-    <option name="defaultAccountId" value="843b6fb7-2f28-4661-87c9-ba4d3d02990c" />
-  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>

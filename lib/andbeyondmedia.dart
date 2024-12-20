@@ -1,13 +1,14 @@
 library andbeyondmedia;
 
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:andbeyondmedia/src/sdk/ConfigProvider.dart';
 import 'package:andbeyondmedia/src/sdk/Logger.dart';
 import 'package:andbeyondmedia/src/sdk/NetworkManager.dart';
 import 'package:andbeyondmedia/src/sdk/SDKConfig.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 class AndBeyondMedia {
   AndBeyondMedia._();
@@ -78,6 +79,24 @@ class EventHelper {
   static EventHelper get instance => _instance;
 
   attachEventHandler() {
-    // Isolate.current.setErrorsFatal(false); // Allow handling uncaught exceptions
+    PlatformDispatcher.instance.onError = (error, stack) {
+      print('Error outside of Flutter framework: $error');
+      print('Stack trace: $stack');
+      return true;
+    };
+  }
+
+  attachSentry() async {
+    await SentryFlutter.init((options) {
+      options.dsn =
+          'https://1ff34dec1694fa8c067f81f747a62375@o4505753409421312.ingest.us.sentry.io/4505753410732032';
+      // Set tracesSampleRate to 1.0 to capture 100% of transactions for tracing.
+      // We recommend adjusting this value in production.
+      options.tracesSampleRate = 1.0;
+      // The sampling rate for profiling is relative to tracesSampleRate
+      // Setting to 1.0 will profile 100% of sampled transactions:
+      // Note: Profiling alpha is available for iOS and macOS since SDK version 7.12.0
+      options.profilesSampleRate = 1.0;
+    });
   }
 }
