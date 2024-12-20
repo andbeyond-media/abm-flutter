@@ -57,7 +57,7 @@
     },
     {
       "name": "connectivity_plus",
-      "rootUri": "file:///Users/sonusony/.pub-cache/hosted/pub.dev/connectivity_plus-6.1.0",
+      "rootUri": "file:///Users/sonusony/.pub-cache/hosted/pub.dev/connectivity_plus-6.1.1",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -207,13 +207,13 @@
     },
     {
       "name": "package_info_plus",
-      "rootUri": "file:///Users/sonusony/.pub-cache/hosted/pub.dev/package_info_plus-8.1.1",
+      "rootUri": "file:///Users/sonusony/.pub-cache/hosted/pub.dev/package_info_plus-8.1.2",
       "packageUri": "lib/",
       "languageVersion": "3.3"
     },
     {
       "name": "package_info_plus_platform_interface",
-      "rootUri": "file:///Users/sonusony/.pub-cache/hosted/pub.dev/package_info_plus_platform_interface-3.0.1",
+      "rootUri": "file:///Users/sonusony/.pub-cache/hosted/pub.dev/package_info_plus_platform_interface-3.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -500,7 +500,7 @@
       "languageVersion": "3.5"
     }
   ],
-  "generated": "2024-12-20T17:19:41.686231Z",
+  "generated": "2024-12-20T17:25:08.197356Z",
   "generator": "pub",
   "generatorVersion": "3.5.4",
   "flutterRoot": "file:///Users/sonusony/development/flutter",
