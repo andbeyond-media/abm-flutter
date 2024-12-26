@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:andbeyondmedia/src/common/ad_listeners.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:visibility_detector/visibility_detector.dart';
@@ -11,13 +12,20 @@ class BannerAdLoader {
   final String adUnit;
   final AdLoadRequest request;
   final List<AdSize> sizes;
-  final Function(BannerAdView) adLoadListener;
-  final Function(BannerAdView, LoadAdError?) adFailedListener;
+  final AdListener adListener;
   late BannerAdView bannerAdView;
   late BannerAdManager _bannerAdManager;
+  String section = "";
+  String adType = AdTypes.BANNER;
 
-  BannerAdLoader(this.adUnit, this.request, this.sizes, this.adLoadListener,
-      this.adFailedListener) {
+  BannerAdLoader(
+      {required this.adUnit,
+      required this.request,
+      required this.sizes,
+      required this.adListener,
+      this.section = "",
+      this.adType = AdTypes.BANNER})
+      : assert(sizes.isNotEmpty) {
     _init();
   }
 
@@ -26,27 +34,32 @@ class BannerAdLoader {
       switch (event) {
         case AdStatus.loaded:
           {
-            adLoadListener(bannerAdView);
+            adListener.onAdLoaded?.call(bannerAdView);
           }
           break;
         case AdStatus.failed:
           {
-            adFailedListener(bannerAdView, err);
+            adListener.onAdFailedToLoad?.call(bannerAdView, err);
           }
           break;
         case AdStatus.impressed:
+          adListener.onAdImpression?.call(bannerAdView);
           break;
         case AdStatus.clicked:
+          adListener.onAdClicked?.call(bannerAdView);
           break;
         case AdStatus.opened:
+          adListener.onAdOpened?.call(bannerAdView);
           break;
         case AdStatus.closed:
+          adListener.onAdClosed?.call(bannerAdView);
           break;
         case AdStatus.dismiss:
+          adListener.onAdWillDismissScreen?.call(bannerAdView);
           break;
       }
     });
-    _bannerAdManager.setDetails(adUnit, request, sizes);
+    _bannerAdManager.setDetails(adUnit, request, sizes, section, adType);
   }
 
   BannerAdView loadAd() {

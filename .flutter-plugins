@@ -7,7 +7,6 @@ path_provider_android=/Users/sonusony/.pub-cache/hosted/pub.dev/path_provider_an
 path_provider_foundation=/Users/sonusony/.pub-cache/hosted/pub.dev/path_provider_foundation-2.4.1/
 path_provider_linux=/Users/sonusony/.pub-cache/hosted/pub.dev/path_provider_linux-2.2.1/
 path_provider_windows=/Users/sonusony/.pub-cache/hosted/pub.dev/path_provider_windows-2.3.0/
-sentry_flutter=/Users/sonusony/.pub-cache/hosted/pub.dev/sentry_flutter-8.11.2/
 sqflite=/Users/sonusony/.pub-cache/hosted/pub.dev/sqflite-2.4.1/
 sqflite_android=/Users/sonusony/.pub-cache/hosted/pub.dev/sqflite_android-2.4.0/
 sqflite_darwin=/Users/sonusony/.pub-cache/hosted/pub.dev/sqflite_darwin-2.4.1/

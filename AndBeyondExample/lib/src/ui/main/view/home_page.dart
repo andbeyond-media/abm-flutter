@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:andbeyondmedia/src/banners/banner_ad_view.dart';
 import 'package:andbeyondmedia/src/common/ad_request.dart';
+import 'package:andbeyondmedia/src/common/ad_listeners.dart';
 
 class HomePage extends BasePageScreen {
   const HomePage({super.key});
@@ -53,14 +54,19 @@ class _HomePageState extends BasePageScreenState<HomePage> with BaseScreen {
   }
 
   void loadAd() async {
-    BannerAdLoader(adUnitId, AdLoadRequest().build(),
-        [const AdSize(width: 320, height: 50)], (BannerAdView ad) {
-      debugPrint("pub: banner ad loaded");
-      setState(() {
-        _bannerAd = ad;
-      });
-    }, (ad, err) {
-      debugPrint("pub: banner ad failed : $err");
-    }).loadAd();
+    BannerAdLoader(
+            adUnit: adUnitId,
+            request: AdLoadRequest().build(),
+            sizes: [const AdSize(width: 320, height: 50)],
+            adListener: AdListener(onAdLoaded: (ad) {
+              debugPrint("pub: banner ad loaded");
+              setState(() {
+                _bannerAd = ad;
+              });
+            }, onAdFailedToLoad: (ad, err) {
+              debugPrint("pub: banner ad failed : $err");
+            }),
+            section: "ad_details")
+        .loadAd();
   }
 }

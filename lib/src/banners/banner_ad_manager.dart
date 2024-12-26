@@ -23,6 +23,7 @@ class BannerAdManager {
   late AdLoadRequest pubAdRequest;
   late List<AdSize> pubAdSizes;
   String section = "";
+  String adType = AdTypes.BANNER;
 
   final EventCallBack _eventCallBack;
   AdManagerBannerAd? _bannerAdHolder;
@@ -71,10 +72,12 @@ class BannerAdManager {
   }
 
   void setDetails(
-      String pubAdUnit, AdLoadRequest pubAdRequest, List<AdSize> pubAdSizes) {
+      String pubAdUnit, AdLoadRequest pubAdRequest, List<AdSize> pubAdSizes, String section, String adType) {
     this.pubAdUnit = pubAdUnit;
     this.pubAdRequest = pubAdRequest;
     this.pubAdSizes = pubAdSizes;
+    this.section = section;
+    this.adType = adType;
   }
 
   shouldBeActive() => _shouldBeActive;
@@ -124,7 +127,7 @@ class BannerAdManager {
     RefreshConfig? validConfig = _sdkConfig?.refreshConfig?.firstWhereOrNull(
         (config) =>
             (config.specific?.toLowerCase() == pubAdUnit.toLowerCase()) ||
-            (config.type == AdTypes.BANNER) ||
+            (config.type == adType) ||
             (config.type?.toLowerCase() == 'all'));
 
     if (validConfig == null) {
@@ -147,9 +150,9 @@ class BannerAdManager {
       ..placement = validConfig.placement
       ..newUnit = _sdkConfig?.hijackConfig?.newUnit
       ..retryConfig = getRetryConfig()
-      ..hijack = getValidLoadConfig(AdTypes.BANNER, true,
+      ..hijack = getValidLoadConfig(adType, true,
           _sdkConfig?.hijackConfig, _sdkConfig?.unfilledConfig)
-      ..unFilled = getValidLoadConfig(AdTypes.BANNER, false,
+      ..unFilled = getValidLoadConfig(adType, false,
           _sdkConfig?.hijackConfig, _sdkConfig?.unfilledConfig)
       ..difference = _sdkConfig?.difference ?? 0
       ..activeRefreshInterval = _sdkConfig?.activeRefreshInterval ?? 0
