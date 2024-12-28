@@ -1,3 +1,3 @@
-## 0.0.1
+## [0.0.1] - 2024-12-28
 
-* TODO: Describe initial release.
+### Added - Initial release of the package.

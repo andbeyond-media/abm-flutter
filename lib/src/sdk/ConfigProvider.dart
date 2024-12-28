@@ -35,8 +35,7 @@ class ConfigProvider {
     AndBeyondMedia.instance.controller.add(1);
     SdkConfig? config;
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    //var packageName = packageInfo.packageName;
-    var packageName = "com.rtb.andbeyondtest";
+    var packageName = packageInfo.packageName;
     try {
       log("Loading Config for $packageName");
       final response = await http.get(Uri.parse(URLs()._getUrl(packageName)));
