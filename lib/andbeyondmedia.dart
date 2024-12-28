@@ -79,8 +79,6 @@ class EventHelper {
 
   attachEventHandler() {
     PlatformDispatcher.instance.onError = (error, stack) {
-      print('Error outside of Flutter framework: $error');
-      print('Stack trace: $stack');
       return true;
     };
   }
