@@ -1,4 +1,4 @@
-name: abm_flutter
+name: andbeyondmedia
 description: |
   abm-flutter is a robust Flutter package built on Google Ad Manager, designed to seamlessly integrate advanced ad functionalities into your applications. 
   This package not only simplifies the ad integration process but also enhances the user experience by providing additional features such as automatic ad refresh and efficient handling of unfilled ad spaces. 

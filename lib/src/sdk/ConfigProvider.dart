@@ -117,7 +117,7 @@ class ConfigProvider {
         countryModel = await _readCountryInfo();
         _setCountryInfo(countryModel);
       }
-    } on Exception catch (e) {
+    } on Exception catch (_) {
       countryModel = await _readCountryInfo();
       _setCountryInfo(countryModel);
     }

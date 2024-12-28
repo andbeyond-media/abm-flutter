@@ -494,13 +494,13 @@
       "languageVersion": "3.2"
     },
     {
-      "name": "abm_flutter",
+      "name": "andbeyondmedia",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "3.5"
     }
   ],
-  "generated": "2024-12-28T17:45:59.416697Z",
+  "generated": "2024-12-28T17:49:32.696071Z",
   "generator": "pub",
   "generatorVersion": "3.5.4",
   "flutterRoot": "file:///Users/sonusony/development/flutter",
