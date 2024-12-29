@@ -1,21 +1,38 @@
-import 'package:andbeyondexample/src/ui/base/view/base_page.dart';
+
 import 'package:flutter/material.dart';
+import 'package:andbeyondmedia/andbeyondmedia.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:andbeyondmedia/src/banners/banner_ad_view.dart';
-import 'package:andbeyondmedia/src/common/ad_request.dart';
-import 'package:andbeyondmedia/src/common/ad_listeners.dart';
 
-class HomePage extends BasePageScreen {
-  const HomePage({super.key});
-
-  @override
-  State<HomePage> createState() => _HomePageState();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
+  AndBeyondMedia.instance.initialize("com.rtb.andbeyondtest", true);
+  runApp(const MyApp());
 }
 
-class _HomePageState extends BasePageScreenState<HomePage> with BaseScreen {
-  BannerAdView? _bannerAd;
-  bool _isLoaded = false;
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        title: 'Fancy Dialog Example',
+        theme: ThemeData.dark(),
+        initialRoute: '/',
+        home: HomePage());
+  }
+}
 
+class HomePage extends StatefulWidget {
+  const HomePage({
+    super.key,
+  });
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  BannerAdView? _bannerAd;
   final adUnitId = '/6499/example/banner';
 
   @override
@@ -25,7 +42,7 @@ class _HomePageState extends BasePageScreenState<HomePage> with BaseScreen {
   }
 
   @override
-  Widget body() {
+  Widget build(BuildContext context) {
     return SizedBox(
       height: double.infinity,
       width: double.infinity,

@@ -1,17 +1,3 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
-
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
-
-
 `andbeyondmedia` is a powerful Flutter package built on Google Ad Manager, providing enhanced ad
 functionalities for your applications. This package simplifies ad integration and offers additional
 features such as automatic ad refresh and efficient management of unfilled ad spaces.
@@ -26,17 +12,15 @@ features such as automatic ad refresh and efficient management of unfilled ad sp
 
 ## Getting started
 
-Add `andbeyondmedia` to your `pubspec.yaml` file:
+Add `andbeyondmedia` and `google_mobile_ads` to your `pubspec.yaml` file:
 
 ```yaml 
 dependencies:
-    andbeyondmedia: ^1.0.0
+    andbeyondmedia: latest
+    google_mobile_ads: latest
   ```
 
 ## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
 
 ```dart
 
@@ -109,18 +93,18 @@ class _BannerAdWidgetState extends State<BannerAdWidget> {
 
   void loadAd() async {
     BannerAdLoader(
-            adUnit: adUnitId,
-            request: AdLoadRequest().build(),
-            sizes: [const AdSize(width: 320, height: 50)],
-            adListener: AdListener(onAdLoaded: (ad) {
-              debugPrint("pub: banner ad loaded");
-              setState(() {
-                _bannerAd = ad;
-              });
-            }, onAdFailedToLoad: (ad, err) {
-              debugPrint("pub: banner ad failed : $err");
-            }),
-            section: "ad_details")
+        adUnit: adUnitId,
+        request: AdLoadRequest().build(),
+        sizes: [const AdSize(width: 320, height: 50)],
+        adListener: AdListener(onAdLoaded: (ad) {
+          debugPrint("pub: banner ad loaded");
+          setState(() {
+            _bannerAd = ad;
+          });
+        }, onAdFailedToLoad: (ad, err) {
+          debugPrint("pub: banner ad failed : $err");
+        }),
+        section: "ad_details")
         .loadAd();
   }
 }

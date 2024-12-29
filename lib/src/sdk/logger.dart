@@ -3,7 +3,6 @@
 import 'package:flutter/cupertino.dart';
 
 import '../../andbeyondmedia.dart';
-import '../common/constants.dart';
 
 enum Logger {
   debug,
@@ -16,7 +15,7 @@ void log(String msg) {
 }
 
 extension LoggerExtensions on Logger {
-  void log(String msg, [String tag = TAG]) {
+  void log(String msg, [String tag = tag]) {
     switch (this) {
       case Logger.debug:
         debugPrint("$tag : $msg");

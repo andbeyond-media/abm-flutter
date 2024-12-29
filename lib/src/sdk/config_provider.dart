@@ -2,24 +2,32 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import '../../andbeyondmedia.dart';
-import 'Logger.dart';
-import 'SDKConfig.dart';
+import 'logger.dart';
+import 'sdk_config.dart';
 
+/// Class to handle config related things
 class ConfigProvider {
   ConfigProvider._();
 
   static final ConfigProvider _instance = ConfigProvider._().._init();
 
+  ///Creating static instance
   static ConfigProvider get instance => _instance;
 
   SdkConfig? _cachedConfig;
   CountryModel? _cachedCountryInfo;
+  String _packageName = "";
 
   void _init() {}
 
+  ///Saving package name for later use
+  void savePackageName(String packageName){
+    _packageName = packageName;
+  }
+
+  ///used to fetch config
   void fetchConfig(int? delay) async {
     if (delay != null && delay < 900) return;
     if (delay == null) {
@@ -34,11 +42,9 @@ class ConfigProvider {
   void _loadConfig() async {
     AndBeyondMedia.instance.controller.add(1);
     SdkConfig? config;
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    var packageName = packageInfo.packageName;
     try {
-      log("Loading Config for $packageName");
-      final response = await http.get(Uri.parse(URLs()._getUrl(packageName)));
+      log("Loading Config for $_packageName");
+      final response = await http.get(Uri.parse(URLs()._getUrl(_packageName)));
       if (response.statusCode == 200) {
         config = SdkConfig.fromJson(jsonDecode(response.body));
         _setConfig(config);
@@ -72,6 +78,7 @@ class ConfigProvider {
     _cachedConfig = config;
   }
 
+  ///used to provide cached config
   SdkConfig? getConfig() {
     if (_cachedConfig == null) {
       _readConfig().then((config) {
@@ -128,6 +135,7 @@ class ConfigProvider {
     _cachedCountryInfo = info;
   }
 
+  ///Used to provide geo information
   CountryModel? getCountryInfo() {
     if (_cachedCountryInfo == null) {
       _readCountryInfo().then((config) {
@@ -158,6 +166,7 @@ class ConfigProvider {
   }
 }
 
+///class to have the necessary urls
 class URLs {
   final String _baseURL = "https://rtbcdn.andbeyond.media/";
 

@@ -1,5 +1,5 @@
 name: andbeyondexample
-description: "A new Flutter project."
+description: "An example for Andbeyondmedia SDK"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -37,7 +37,6 @@ dependencies:
   cupertino_icons: ^1.0.8
   andbeyondmedia:
     path: ../
-  provider: ^6.0.5
   google_mobile_ads: ^5.2.0
 
 dev_dependencies:

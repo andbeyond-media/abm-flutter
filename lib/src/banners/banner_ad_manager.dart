@@ -2,17 +2,15 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:andbeyondmedia/src/common/extensions.dart';
-import 'package:andbeyondmedia/src/sdk/Logger.dart';
+import 'package:andbeyondmedia/src/sdk/logger.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:collection/collection.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../andbeyondmedia.dart';
-import '../common/ad_request.dart';
-import '../common/constants.dart';
-import '../sdk/ConfigProvider.dart';
-import '../sdk/SDKConfig.dart';
+import '../sdk/config_provider.dart';
+import '../sdk/sdk_config.dart';
 import '../widgets/countdown_timer.dart';
 import 'banner_config.dart';
 

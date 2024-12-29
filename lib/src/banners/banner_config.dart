@@ -1,5 +1,5 @@
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import '../sdk/SDKConfig.dart';
+import '../sdk/sdk_config.dart';
 
 class BannerConfig {
   num? instantRefresh;

@@ -24,6 +24,10 @@ class NetworkManager {
         _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
   }
 
+  void deRegister() {
+    _connectivitySubscription.cancel();
+  }
+
   Future<void> initConnectivity() async {
     late List<ConnectivityResult> result;
     // Platform messages may fail, so we use a try/catch PlatformException.
