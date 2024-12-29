@@ -23,7 +23,7 @@ class ConfigProvider {
   void _init() {}
 
   ///Saving package name for later use
-  void savePackageName(String packageName){
+  void savePackageName(String packageName) {
     _packageName = packageName;
   }
 

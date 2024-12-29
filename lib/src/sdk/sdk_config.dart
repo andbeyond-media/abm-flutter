@@ -128,7 +128,7 @@ class SdkConfig {
   List<List<String>>? block;
   List<String>? heldUnits;
   List<Regions>? regionalHalts;
-  List<Regions>?  sectionRegionalHalt;
+  List<Regions>? sectionRegionalHalt;
   LoadConfigs? hijackConfig;
   LoadConfigs? unfilledConfig;
   List<ABMSize>? supportedSizes;
@@ -208,7 +208,8 @@ class SdkConfig {
       map['regional_halts'] = regionalHalts?.map((v) => v.toJson()).toList();
     }
     if (sectionRegionalHalt != null) {
-      map['section_regional_halts'] = sectionRegionalHalt?.map((v) => v.toJson()).toList();
+      map['section_regional_halts'] =
+          sectionRegionalHalt?.map((v) => v.toJson()).toList();
     }
     if (hijackConfig != null) {
       map['hijack'] = hijackConfig?.toJson();

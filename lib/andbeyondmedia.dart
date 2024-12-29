@@ -21,17 +21,23 @@ class AndBeyondMedia {
 
   ///Creating static instance
   static AndBeyondMedia get instance => _instance;
+
   ///Managing if the logger should be enabled or not
   var logEnabled = false;
+
   ///Will help the package publisher
   String? specialTag = "";
   final _networkManager = NetworkManager.instance;
+
   ///Controller to push config fetch events
   final controller = StreamController<int>.broadcast();
+
   ///Controller to push geo information fetch events
   final countryInfoController = StreamController<int>.broadcast();
+
   ///Used to check the config fetch status
   int lastConfigStatus = 0;
+
   ///Used to check the geo info fetch status
   int lastCountryInfoStatus = 0;
   late StreamSubscription<int> _configSub;

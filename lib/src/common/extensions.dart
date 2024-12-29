@@ -1,4 +1,3 @@
-
 extension DynamicExtension on dynamic {
   int? toIntOrNull() {
     try {

@@ -69,8 +69,8 @@ class BannerAdManager {
     }
   }
 
-  void setDetails(
-      String pubAdUnit, AdLoadRequest pubAdRequest, List<AdSize> pubAdSizes, String section, String adType) {
+  void setDetails(String pubAdUnit, AdLoadRequest pubAdRequest,
+      List<AdSize> pubAdSizes, String section, String adType) {
     this.pubAdUnit = pubAdUnit;
     this.pubAdRequest = pubAdRequest;
     this.pubAdSizes = pubAdSizes;
@@ -106,8 +106,8 @@ class BannerAdManager {
   }
 
   void _setConfig() {
-    pubAdUnit.log(
-        () => "setConfig:entry- Version:${AndBeyondMedia.instance.getLibVersion()}");
+    pubAdUnit.log(() =>
+        "setConfig:entry- Version:${AndBeyondMedia.instance.getLibVersion()}");
     if (!shouldBeActive()) {
       _loadVanilla();
       return;
@@ -148,10 +148,10 @@ class BannerAdManager {
       ..placement = validConfig.placement
       ..newUnit = _sdkConfig?.hijackConfig?.newUnit
       ..retryConfig = getRetryConfig()
-      ..hijack = getValidLoadConfig(adType, true,
-          _sdkConfig?.hijackConfig, _sdkConfig?.unfilledConfig)
-      ..unFilled = getValidLoadConfig(adType, false,
-          _sdkConfig?.hijackConfig, _sdkConfig?.unfilledConfig)
+      ..hijack = getValidLoadConfig(
+          adType, true, _sdkConfig?.hijackConfig, _sdkConfig?.unfilledConfig)
+      ..unFilled = getValidLoadConfig(
+          adType, false, _sdkConfig?.hijackConfig, _sdkConfig?.unfilledConfig)
       ..difference = _sdkConfig?.difference ?? 0
       ..activeRefreshInterval = _sdkConfig?.activeRefreshInterval ?? 0
       ..passiveRefreshInterval = _sdkConfig?.passiveRefreshInterval ?? 0
