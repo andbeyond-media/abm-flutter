@@ -13,3 +13,7 @@
 ### Added
 * Interstitial format support
 * readme updated
+
+## [0.0.4] - 2025-01-07
+### Changed
+* imports optimized

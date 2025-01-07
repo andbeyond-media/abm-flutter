@@ -85,7 +85,7 @@ class AndBeyondMedia {
 
   ///Method to provide the SDK version
   String getLibVersion() {
-    return "0.0.3";
+    return "0.0.4";
   }
 
   ///Method to check connectivity status

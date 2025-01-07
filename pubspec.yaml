@@ -2,7 +2,7 @@ name: andbeyondmedia
 description: |
   andbeyondmedia is a powerful Flutter package built on Google Ad Manager, providing enhanced ad refresh and unfilled management functionalities for your applications.
 repository: https://github.com/andbeyond-media/abm-flutter
-version: 0.0.3
+version: 0.0.4
 
 environment:
   sdk: ^3.5.4

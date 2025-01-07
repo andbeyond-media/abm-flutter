@@ -4,8 +4,6 @@ import 'dart:math';
 import 'package:andbeyondmedia/andbeyondmedia.dart';
 import 'package:andbeyondmedia/src/sdk/logger.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import '../common/ad_request.dart';
-import '../common/constants.dart';
 import 'package:collection/collection.dart';
 import '../sdk/config_provider.dart';
 import '../sdk/sdk_config.dart';
