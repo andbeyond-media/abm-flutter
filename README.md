@@ -16,11 +16,25 @@ Add `andbeyondmedia` and `google_mobile_ads` to your `pubspec.yaml` file:
 
 ```yaml 
 dependencies:
-    andbeyondmedia: latest
-    google_mobile_ads: latest
+  andbeyondmedia: latest
+  google_mobile_ads: latest
   ```
 
 ## Usage
+
+### Main function
+
+Initialize Andbeyondmedia SDK by providing app's package name
+
+```dart
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  AndBeyondMedia.instance.initialize("com.example.app", true);
+  runApp(const MyApp());
+}
+```
+
+### Banner Ad
 
 ```dart
 
@@ -40,74 +54,24 @@ void loadAd() async {
 }
 ```
 
-## Full Example
+### Interstitial ad
+
+Loading an interstitial ad
 
 ```dart
-import 'package:flutter/material.dart';
-import 'package:andbeyondmedia/andbeyondmedia.dart';
-
-class BannerAdWidget extends StatefulWidget {
-  @override
-  _BannerAdWidgetState createState() => _BannerAdWidgetState();
+ void loadInterstitialAd() async {
+  ABMInterstitialLoader(interstitialAdUnit, AdLoadRequest().build(),
+          (ABMInterstitialLoader ad) {
+        debugPrint("pub: interstitial ad loaded");
+        interstitialLoader = ad;
+      }, (err) {
+        debugPrint("pub: interstitial ad failed : $err");
+      }).load();
 }
-
-class _BannerAdWidgetState extends State<BannerAdWidget> {
-  BannerAdView? _bannerAd;
-  bool _isLoaded = false;
-  final adUnitId = '/6499/example/banner';
-
-  @override
-  void initState() {
-    super.initState();
-    loadAd();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: double.infinity,
-      width: double.infinity,
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Container(
-          child: Align(
-            alignment: Alignment.bottomCenter,
-            child: SizedBox(
-              height: 50,
-              width: 320,
-              child: getChild(),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget getChild() {
-    if (_bannerAd == null) {
-      return Container();
-    } else {
-      return SizedBox(width: 320, height: 50, child: _bannerAd);
-    }
-  }
-
-  void loadAd() async {
-    BannerAdLoader(
-        adUnit: adUnitId,
-        request: AdLoadRequest().build(),
-        sizes: [const AdSize(width: 320, height: 50)],
-        adListener: AdListener(onAdLoaded: (ad) {
-          debugPrint("pub: banner ad loaded");
-          setState(() {
-            _bannerAd = ad;
-          });
-        }, onAdFailedToLoad: (ad, err) {
-          debugPrint("pub: banner ad failed : $err");
-        }),
-        section: "ad_details")
-        .loadAd();
-  }
-}
-
 ```
 
+Showing interstitial ad
+
+```dart
+  interstitialLoader?.show()
+```

@@ -1,24 +1,23 @@
-
 import 'package:flutter/material.dart';
 import 'package:andbeyondmedia/andbeyondmedia.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  MobileAds.instance.initialize();
   AndBeyondMedia.instance.initialize("com.rtb.andbeyondtest", true);
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Fancy Dialog Example',
+        title: 'Andbeyondmedia SDK Example',
         theme: ThemeData.dark(),
         initialRoute: '/',
-        home: HomePage());
+        home: const HomePage());
   }
 }
 
@@ -33,12 +32,15 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   BannerAdView? _bannerAd;
+  ABMInterstitialLoader? interstitialLoader;
   final adUnitId = '/6499/example/banner';
+  final interstitialAdUnit = '/21775744923/example/interstitial';
 
   @override
   void initState() {
     super.initState();
     loadAd();
+    loadInterstitialAd();
   }
 
   @override
@@ -48,15 +50,26 @@ class _HomePageState extends State<HomePage> {
       width: double.infinity,
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: Container(
-          child: Align(
-            alignment: Alignment.bottomCenter,
-            child: SizedBox(
-              height: 50,
-              width: 320,
-              child: getChild(),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            ElevatedButton(
+                child: const Text("Show interstitial"),
+                onPressed: () {
+                  interstitialLoader?.show();
+                }),
+            const SizedBox(height: 200),
+            Container(
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: SizedBox(
+                  height: 50,
+                  width: 320,
+                  child: getChild(),
+                ),
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );
@@ -85,5 +98,15 @@ class _HomePageState extends State<HomePage> {
             }),
             section: "ad_details")
         .loadAd();
+  }
+
+  void loadInterstitialAd() async {
+    ABMInterstitialLoader(interstitialAdUnit, AdLoadRequest().build(),
+        (ABMInterstitialLoader ad) {
+      debugPrint("pub: interstitial ad loaded");
+      interstitialLoader = ad;
+    }, (err) {
+      debugPrint("pub: interstitial ad failed : $err");
+    }).load();
   }
 }

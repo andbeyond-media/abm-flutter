@@ -12,6 +12,7 @@ export 'src/banners/banner_ad_view.dart';
 export 'src/common/ad_listeners.dart';
 export 'src/common/ad_request.dart';
 export 'src/common/constants.dart';
+export 'src/interstitial/abm_interstitial_loader.dart';
 
 ///Main class to start the SDK
 class AndBeyondMedia {
@@ -77,13 +78,14 @@ class AndBeyondMedia {
   configFetched(SdkConfig? config) {
     specialTag = config?.infoConfig?.specialTag;
     logEnabled = (logEnabled || config?.infoConfig?.normalInfo == 1);
-    MobileAds.instance.initialize();
-    controller.add(2);
+    MobileAds.instance.initialize().then((_) {
+      controller.add(2);
+    });
   }
 
   ///Method to provide the SDK version
   String getLibVersion() {
-    return "0.0.2";
+    return "0.0.3";
   }
 
   ///Method to check connectivity status

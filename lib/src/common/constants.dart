@@ -8,4 +8,5 @@ class AdTypes {
   static const STICKY = "STICKY";
   static const INREAD = "INREAD";
   static const ADAPTIVE = "ADAPTIVE";
+  static const INTERSTITIAL = "INTERSTITIAL";
 }
