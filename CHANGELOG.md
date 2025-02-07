@@ -17,3 +17,7 @@
 ## [0.0.4] - 2025-01-07
 ### Changed
 * imports optimized
+
+## [0.0.4] - 2025-01-07
+### Changed
+* dart SDK downgraded

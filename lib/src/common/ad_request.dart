@@ -23,8 +23,7 @@ class AdLoadRequest {
       int? httpTimeoutMillis,
       String? publisherProvidedId,
       String? mediationExtrasIdentifier,
-      Map<String, String>? extras,
-      List<MediationExtras>? mediationExtras}) {
+      Map<String, String>? extras}) {
     _requestBuilt = true;
     var defaultTargeting = {"ABM_Load": "Yes"};
     if (customTargeting != null) {
@@ -40,8 +39,7 @@ class AdLoadRequest {
         httpTimeoutMillis: httpTimeoutMillis,
         publisherProvidedId: publisherProvidedId,
         mediationExtrasIdentifier: mediationExtrasIdentifier,
-        extras: extras,
-        mediationExtras: mediationExtras);
+        extras: extras);
     return this;
   }
 }

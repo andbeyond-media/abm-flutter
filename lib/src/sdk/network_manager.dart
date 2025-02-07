@@ -13,7 +13,7 @@ class NetworkManager {
 
   ConnectivityResult? _connectionStatus = ConnectivityResult.none;
   final Connectivity _connectivity = Connectivity();
-  late StreamSubscription<List<ConnectivityResult>> _connectivitySubscription;
+  late StreamSubscription<ConnectivityResult?> _connectivitySubscription;
 
   void _init() {
     initConnectivity();
@@ -29,7 +29,7 @@ class NetworkManager {
   }
 
   Future<void> initConnectivity() async {
-    late List<ConnectivityResult> result;
+    late ConnectivityResult? result;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       result = await _connectivity.checkConnectivity();
@@ -45,8 +45,8 @@ class NetworkManager {
     return _updateConnectionStatus(result);
   }
 
-  Future<void> _updateConnectionStatus(List<ConnectivityResult> result) async {
-    _connectionStatus = result.firstOrNull;
+  Future<void> _updateConnectionStatus(ConnectivityResult? result) async {
+    _connectionStatus = result;
   }
 
   bool isInternetAvailable() {
