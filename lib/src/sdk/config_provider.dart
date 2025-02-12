@@ -28,15 +28,8 @@ class ConfigProvider {
   }
 
   ///used to fetch config
-  void fetchConfig(int? delay) async {
-    if (delay != null && delay < 900) return;
-    if (delay == null) {
-      _loadConfig();
-    } else {
-      Timer(Duration(seconds: delay), () {
-        _loadConfig();
-      });
-    }
+  void fetchConfig() async {
+    _loadConfig();
   }
 
   void _loadConfig() async {
@@ -60,13 +53,10 @@ class ConfigProvider {
       _setConfig(config);
       log("Failed hard to load config.${e.toString()}");
     }
-    if (config?.reFetch != null) {
-      fetchConfig(config?.reFetch);
-    }
     var countryFetchStatus = config?.countryStatus;
     if (countryFetchStatus?.active == 1 &&
         countryFetchStatus?.url?.isNotEmpty == true) {
-      _fetchDetectedCountry(countryFetchStatus?.url);
+      _fetchDetectedCountry(countryFetchStatus?.url, config);
     } else {
       AndBeyondMedia.instance.countryInfoController.add(2);
     }
@@ -108,7 +98,7 @@ class ConfigProvider {
     }
   }
 
-  void _fetchDetectedCountry(String? url) async {
+  void _fetchDetectedCountry(String? url, SdkConfig? config) async {
     AndBeyondMedia.instance.countryInfoController.add(1);
     CountryModel? countryModel;
     try {
@@ -129,6 +119,7 @@ class ConfigProvider {
       _setCountryInfo(countryModel);
     }
     AndBeyondMedia.instance.countryInfoController.add(2);
+    AndBeyondMedia.instance.geoDetected(countryModel, config?.silentInterstitialConfig);
   }
 
   void _setCountryInfo(CountryModel? info) {

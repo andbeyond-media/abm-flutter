@@ -27,3 +27,40 @@ class InterstitialConfig {
     };
   }
 }
+
+class SilentInterstitialConfig {
+  SilentInterstitialConfig();
+
+  int? active;
+  String? adunit;
+  int? rewarded;
+  int? timer;
+  num? closeDelay;
+  int? loadFrequency;
+  Regions? regions;
+
+  SilentInterstitialConfig.fromJson(dynamic json) {
+    active = json['active'];
+    adunit = json['adunit'];
+    rewarded = json['rewarded'];
+    timer = json['timer'];
+    closeDelay = json['close_delay'];
+    loadFrequency = json['load_frequency'];
+    regions =
+        json['regions'] != null ? Regions.fromJson(json['regions']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['active'] = active;
+    map['adunit'] = adunit;
+    map['rewarded'] = rewarded;
+    map['timer'] = timer;
+    map['close_delay'] = closeDelay;
+    map['load_frequency'] = loadFrequency;
+    if (regions != null) {
+      map['regions'] = regions?.toJson();
+    }
+    return map;
+  }
+}

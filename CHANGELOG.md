@@ -18,6 +18,10 @@
 ### Changed
 * imports optimized
 
-## [0.0.5] - 2025-01-07
+## [0.0.5] - 2025-02-09
 ### Changed
 * dart SDK downgraded
+
+## [0.0.5] - 2025-02-12
+### Added
+* Interstitial Support Added

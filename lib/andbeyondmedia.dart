@@ -1,7 +1,10 @@
 library andbeyondmedia;
 
 import 'dart:async';
+import 'dart:math';
 
+import 'package:andbeyondmedia/src/interstitial/interstitial_config.dart';
+import 'package:andbeyondmedia/src/interstitial/silent_interstitial.dart';
 import 'package:andbeyondmedia/src/sdk/config_provider.dart';
 import 'package:andbeyondmedia/src/sdk/logger.dart';
 import 'package:andbeyondmedia/src/sdk/network_manager.dart';
@@ -30,6 +33,9 @@ class AndBeyondMedia {
   String? specialTag = "";
   final _networkManager = NetworkManager.instance;
 
+  ///Managing silent interstitial
+  SilentInterstitial? silentInterstitial;
+
   ///Controller to push config fetch events
   final controller = StreamController<int>.broadcast();
 
@@ -56,7 +62,7 @@ class AndBeyondMedia {
     logEnabled = enableLog;
     _networkManager.register();
     ConfigProvider.instance.savePackageName(packageName);
-    ConfigProvider.instance.fetchConfig(null);
+    ConfigProvider.instance.fetchConfig();
   }
 
   void _keepCheckOfConfig() {
@@ -83,9 +89,55 @@ class AndBeyondMedia {
     });
   }
 
+  void geoDetected(CountryModel? countryConfig,
+      SilentInterstitialConfig? silentInterstitialConfig) {
+    silentInterstitial ??= SilentInterstitial();
+
+    if (silentInterstitialConfig == null) {
+      silentInterstitial?.destroy();
+      return;
+    }
+
+    bool shouldStart;
+    final regionConfig = silentInterstitialConfig.regions;
+    if (regionConfig == null ||
+        (regionConfig.getCities().isEmpty &&
+            regionConfig.getStates().isEmpty &&
+            regionConfig.getCountries().isEmpty)) {
+      shouldStart = true;
+    } else {
+      if ((regionConfig.mode ?? "allow").toLowerCase().contains("allow")) {
+        shouldStart = regionConfig.getCities().any((city) =>
+                city.toLowerCase() ==
+                (countryConfig?.city ?? "").toLowerCase()) ||
+            regionConfig.getStates().any((state) =>
+                state.toLowerCase() ==
+                (countryConfig?.state ?? "").toLowerCase()) ||
+            regionConfig.getCountries().any((country) =>
+                country.toLowerCase() ==
+                (countryConfig?.countryCode ?? "").toLowerCase());
+      } else {
+        shouldStart = !regionConfig.getCities().any((city) =>
+                city.toLowerCase() ==
+                (countryConfig?.city ?? "").toLowerCase()) &&
+            !regionConfig.getStates().any((state) =>
+                state.toLowerCase() ==
+                (countryConfig?.state ?? "").toLowerCase()) &&
+            !regionConfig.getCountries().any((country) =>
+                country.toLowerCase() ==
+                (countryConfig?.countryCode ?? "").toLowerCase());
+      }
+    }
+
+    final number = Random().nextInt(100) + 1;
+    if (shouldStart && number <= (silentInterstitialConfig.active ?? 0)) {
+      silentInterstitial?.init();
+    }
+  }
+
   ///Method to provide the SDK version
   String getLibVersion() {
-    return "0.0.5";
+    return "0.0.6";
   }
 
   ///Method to check connectivity status

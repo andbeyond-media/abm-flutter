@@ -1,3 +1,5 @@
+import '../interstitial/interstitial_config.dart';
+
 class SdkConfig {
   SdkConfig.fromJson(dynamic json) {
     affiliatedId = json['aff'];
@@ -593,51 +595,6 @@ class OpenWrapConfig {
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['playstore_url'] = playstoreUrl;
-    return map;
-  }
-}
-
-class SilentInterstitialConfig {
-  SilentInterstitialConfig.fromJson(dynamic json) {
-    active = json['active'];
-    adunit = json['adunit'];
-    custom = json['custom'];
-    timer = json['timer'];
-    closeDelay = json['close_delay'];
-    loadFrequency = json['load_frequency'];
-    regions =
-        json['regions'] != null ? Regions.fromJson(json['regions']) : null;
-    if (json['sizes'] != null) {
-      sizes = [];
-      json['sizes'].forEach((v) {
-        sizes?.add(ABMSize.fromJson(v));
-      });
-    }
-  }
-
-  num? active;
-  String? adunit;
-  num? custom;
-  num? timer;
-  num? closeDelay;
-  num? loadFrequency;
-  Regions? regions;
-  List<ABMSize>? sizes;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['active'] = active;
-    map['adunit'] = adunit;
-    map['custom'] = custom;
-    map['timer'] = timer;
-    map['close_delay'] = closeDelay;
-    map['load_frequency'] = loadFrequency;
-    if (regions != null) {
-      map['regions'] = regions?.toJson();
-    }
-    if (sizes != null) {
-      map['sizes'] = sizes?.map((v) => v.toJson()).toList();
-    }
     return map;
   }
 }
